@@ -5,8 +5,11 @@
 import csv
 ###
 import sys
-
-
+import requests
+import urllib.request 
+import urllib.error 
+import http.client
+import json
 
     
 
@@ -40,8 +43,33 @@ def pricing (file, quantity):
 		overall_price = 0
 		unmatched_components = []
 
+		
+		
+		refresh_token = "**PLACEHOLDER**"
 
+		url = "https://api.digikey.com/v1/oauth2/token"
 
+		post_data = {"client_id":"**PLACEHOLDER**",
+					 "client_secret":"**PLACEHOLDER**",
+					 "refresh_token":refresh_token,
+					 "grant_type":"refresh_token"}
+
+		response = requests.post(url, data=post_data)
+
+		
+		
+		extract = response.json()
+		print(extract)
+	
+
+		refresh_token = extract['refresh_token']
+		access_token = extract['access_token']
+		print("refresh token: " + refresh_token)
+		print("access token: " + access_token)
+		
+
+		
+		
 	
 
 
